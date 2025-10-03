@@ -50,6 +50,7 @@
 
 ### 1
 
+<img width="720" height="456" alt="diagramme-sequence_list_place drawio_720" src="https://github.com/user-attachments/assets/e8088316-0109-44f4-9a0f-425a7d5669ca" />
 
 
 Dans ce diagramme de sequence l'utilistateur recherche des lieux.
@@ -58,6 +59,7 @@ Ensuite le business logic layer demande a la data base de lire les donnés une f
 
 ### 2
 
+<img width="720" height="570" alt="diagramme-sequence_place_creation drawio_720" src="https://github.com/user-attachments/assets/b21bcc85-595d-42a7-ae61-f0c6258d64ba" />
 
 
 Dans ce diagramme de sequence l'utilisateur créer un lieu.
@@ -66,6 +68,7 @@ et si elle n'existe pas il save les donner puis le businesslogic layer valide le
 
 ### 3
 
+<img width="720" height="570" alt="diagramme-sequence_register drawio_720" src="https://github.com/user-attachments/assets/43c38b1a-5de0-43fa-b987-435aec6e0bf5" />
 
 
 Dans ce diagramme de sequence l'utilisateur créer un nouveau compte.
@@ -74,6 +77,7 @@ et si elle n'existe pas il save les donner puis le businesslogic layer valide le
 
 ### 4
 
+<img width="720" height="456" alt="diagramme-sequence_review_submit drawio_720" src="https://github.com/user-attachments/assets/e7ce1833-6236-47f3-8489-8d6f76e627ff" />
 
 
 Dans ce diagramme de sequence l'utilisateur créer une review.
