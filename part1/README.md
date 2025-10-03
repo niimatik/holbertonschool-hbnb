@@ -26,6 +26,7 @@ The Business Logic Layer will define how the website should respond. It handle C
 
 The Persistance Layer will handle data. It contains the database, and will save, delete or update data and informations to that database.
 
+<img width="412" height="720" alt="diagramme-package drawio_720" src="https://github.com/user-attachments/assets/77a75cd1-f375-4b1f-9660-8fa5a3d66173" />
 
 ---
 
