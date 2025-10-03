@@ -4,18 +4,15 @@
 
 ## 📝 Introduction
 
-> ✍️ Dans le cadre de ce projet, nous avons entrepris la reproduction du site Airbnb — renommé ici "rbnb" — afin d’explorer et de modéliser son architecture à travers différents diagrammes UML.
+> ✍️ Dans le cadre de ce projet, nous avons entrepris la reproduction du site Airbnb — renommé ici "Hbnb".
 >
-> Ce travail a pour objectif de représenter de manière claire et structurée le fonctionnement interne de l’application, du point de vue technique et fonctionnel.
-> Les diagrammes produits permettent de visualiser les interactions entre les composants du système, les flux > de données, ainsi que les comportements attendus des utilisateurs et des entités du système.
+> Ce travail a pour objectif de représenter de manière claire et structurée le fonctionnement interne de l’application, d'un point de vue technique.
+> Les diagrammes produits permettent de visualiser les interactions entre les composants du système, les flux de données, ainsi que les comportements attendus des utilisateurs et le système.
 >
 > Les principaux types de diagrammes abordés dans ce projet incluent :
 > - Le diagramme de package
 > - Le diagramme de classes
 > - Le diagramme de séquence
->
-> Ces représentations graphiques sont essentielles pour la conception, le développement, la communication entre les membres de l’équipe, ainsi que pour la documentation du projet.
-
 
 ---
 
