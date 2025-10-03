@@ -44,19 +44,40 @@
 
 ---
 
-## 🔹 Partie 3 : *Titre de la troisième partie*
-
-> 🎯 **Objectif :**
->
-> Mettez en avant les résultats, les tests ou les fonctionnalités clés finalisées ici.
-
-### 📈 Résultats / Sorties attendues :
-
-- Résultat A
-- Résultat B
-- Résultat C
+## 🔹 Partie 3 : Les diagrammes de sequences
 
 ---
+
+### 1
+
+
+
+Dans ce diagramme de sequence l'utilistateur recherche des lieux.
+Il fait d'abord la demande a l'API de lire les donnés l'API demande au businessligic layer de chercher les donnés correspondantes.
+Ensuite le business logic layer demande a la data base de lire les donnés une fois trouver il les renvois jusqu'a l'utilisateur sous forme de liste.
+
+### 2
+
+
+
+Dans ce diagramme de sequence l'utilisateur créer un lieu.
+Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
+et si elle n'existe pas il save les donner puis le businesslogic layer valide le lieux et l'API a créer le lieux.
+
+### 3
+
+
+
+Dans ce diagramme de sequence l'utilisateur créer un nouveau compte.
+Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
+et si elle n'existe pas il save les donner puis le businesslogic layer valide le compte et l'API le créer.
+
+### 4
+
+
+
+Dans ce diagramme de sequence l'utilisateur créer une review.
+Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui demande a la database de save les donner puis le businesslogic layer valide la review et l'API la créer.
 
 ## ✅ Conclusion
 
@@ -66,46 +87,4 @@
 
 ---
 
-## ✉️ Contact
-
-> Pour toute question, contactez : **[Votre Prénom Nom]**  
-> 📧 Email : `votre.email@example.com`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Dans ce diagramme de sequence l'utilistateur recherche des lieux.
-Il fait d'abord la demande a l'API de lire les donnés l'API demande au businessligic layer de chercher les donnés correspondantes.
-Ensuite le business logic layer demande a la data base de lire les donnés une fois trouver il les renvois jusqu'a l'utilisateur sous forme de liste.
-
-Dans ce diagramme de sequence l'utilisateur créer un lieu.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
-et si elle n'existe pas il save les donner puis le businesslogic layer valide le lieux et l'API a créer le lieux.
-
-Dans ce diagramme de sequence l'utilisateur créer un nouveau compte.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
-et si elle n'existe pas il save les donner puis le businesslogic layer valide le compte et l'API le créer.
-
-Dans ce diagramme de sequence l'utilisateur créer une review.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui demande a la database de save les donner puis le businesslogic layer valide la review et l'API la créer.
+## ✉️ Author
