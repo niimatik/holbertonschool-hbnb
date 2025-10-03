@@ -63,7 +63,7 @@ Ensuite le business logic layer demande a la data base de lire les donnés une f
 
 
 Dans ce diagramme de sequence l'utilisateur créer un lieu.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
+Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur
 et si elle n'existe pas il save les donner puis le businesslogic layer valide le lieux et l'API a créer le lieux.
 
 ### 3
@@ -72,7 +72,7 @@ et si elle n'existe pas il save les donner puis le businesslogic layer valide le
 
 
 Dans ce diagramme de sequence l'utilisateur créer un nouveau compte.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur 
+Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur
 et si elle n'existe pas il save les donner puis le businesslogic layer valide le compte et l'API le créer.
 
 ### 4
@@ -92,3 +92,7 @@ Il fait d'abord un appelle API de création puis l'API valide les donnés au pr�
 ---
 
 ## ✉️ Author
+
+- [@niimatik](https://github.com/niimatik)
+- [@GuillaumeLerayGirardeau](https://github.com/GuillaumeLerayGirardeau)
+- [@](https://github.com/)
