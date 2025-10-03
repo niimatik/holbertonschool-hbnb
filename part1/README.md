@@ -51,6 +51,8 @@ Concerning the relations between each classes, User, Place and Amenity got an As
 The relation between Place and Review is a Composition relation, meaning that if the place is deleted, every review related to this place will also be deleted.
 The relation between the Base Model and all the other classes si a Generalisation relation, meaning that all classes inherits from the Base Model class.
 
+<img width="681" height="801" alt="diagramme_classdrawio drawio" src="https://github.com/user-attachments/assets/32f06e05-0306-449e-b078-02b68adac0b4" />
+
 ---
 
 ## 🔹 Partie 3 : Les diagrammes de sequences
