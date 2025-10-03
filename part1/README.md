@@ -18,6 +18,13 @@
 
 ## 🔹 Part 1: Package diagram
 
+This Sequence diagram shows the simplified working process of the HbnB website. It allows us to have a better and simple visualisation of the whole project with separated categories, without having to much details to deal with.
+
+The first Layer is the Persistence Layer. It is the visible part of the websote for the user, and contains the User Interface (UI) that the user can use, the Presentation Logic that will handle the visual and the navigation, and the API, allowing the communicaiton between the UI and the Business Logic Layer.
+
+The Business Logic Layer will define how the website should respond. It handle CRUD operations (Create, Read, Update, Delete) for the four entities User, Place, Review and Amenity. It communicates with the database through the Persistance Layer.
+
+The Persistance Layer will handle data. It contains the database, and will save, delete or update data and informations to that database.
 
 
 ---
