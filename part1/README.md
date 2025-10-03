@@ -18,15 +18,7 @@
 
 ## 🔹 Part 1: *Title of the first part*
 
-> 🎯 **Objective:**
->
-> Explain what this part covers, the steps, or relevant modules.
 
-### ✅ Details:
-
-- Element 1
-- Element 2
-- Element 3
 
 ---
 
