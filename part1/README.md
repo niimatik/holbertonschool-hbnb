@@ -1,106 +1,115 @@
-# 📘 Projet : HBNB
+# 📘 Project: HBNB
 
 ---
 
 ## 📝 Introduction
 
-> ✍️ Dans le cadre de ce projet, nous avons entrepris la reproduction du site Airbnb — renommé ici "Hbnb".
+> ✍️ As part of this project, we undertook the reproduction of the Airbnb website — renamed here as "Hbnb".
 >
-> Ce travail a pour objectif de représenter de manière claire et structurée le fonctionnement interne de l’application, d'un point de vue technique.
-> Les diagrammes produits permettent de visualiser les interactions entre les composants du système, les flux de données, ainsi que les comportements attendus des utilisateurs et le système.
+> The goal of this work is to clearly and structurally represent the internal functioning of the application from a technical point of view.
+> The diagrams created allow us to visualize interactions between the system components, data flows, and expected behaviors of both users and the system.
 >
-> Les principaux types de diagrammes abordés dans ce projet incluent :
-> - Le diagramme de package
-> - Le diagramme de classes
-> - Le diagramme de séquence
+> The main types of diagrams included in this project are:
+> - Package Diagram
+> - Class Diagram
+> - Sequence Diagram
 
 ---
 
-## 🔹 Partie 1 : *Titre de la première partie*
+## 🔹 Part 1: *Title of the first part*
 
-> 🎯 **Objectif :**
+> 🎯 **Objective:**
 >
-> Expliquez ce que cette partie couvre, les étapes ou les modules concernés.
+> Explain what this part covers, the steps, or relevant modules.
 
-### ✅ Détails :
+### ✅ Details:
 
-- Élément 1
-- Élément 2
-- Élément 3
-
----
-
-## 🔹 Partie 2 : *Titre de la deuxième partie*
-
-This class diagram presents the differents classes of the HbnB website. You can now visualise how the website is composed into four different classes, each of them having a specific role in the website structure.
-
-
-Let's have a quick review of the different classes on this diagram :
-
-First, the Base Model call contains a bunch of usefull methods that most of other classes will use. It contains an ID that every class will have to identify them, alongside the CRUD methods : Create, Read, Update and Delete.
-
-The User class will contain all the informations about each users of the website. Some of these data are very personnal, such as the user email or password, and this is why we decided to make these informations private. With this class, any user can register, and update or delete their first name, last name, email and password. We also included an administrator idendificator, so the website owner can modifiy the HbnB website when connected.
-
-The Place class will handle informations about places available on the website. Each places gather a bunch of information : title, description, place, location (latitude and longitude), owner and amenities (note that the amenites available for each places are part of the Amenity class). Each of these information can be created, updated, deleted or listed.
-
-The Review class will concern messages and notes each user of HbnB can give to a place. It contains a place, a user, a rating and a comment. Such as the Place class, each of these attributes can be created, updated, deleted or listed.
-
-Last but not least, the Amenity class contains all the aminities available for each places on HbnB. It contains the name and the description of the amenity. These two attributes can also be created, updated, deleted or listed.
-
-Concerning the relations between each classes, User, Place and Amenity got an Association relation. For example, a user can have several place, but one place only belong to one user.
-The relation between Place and Review is a Composition relation, meaning that if the place is deleted, every review related to this place will also be deleted.
-The relation between the Base Model and all the other classes si a Generalisation relation, meaning that all classes inherits from the Base Model class.
-
-<img width="729" height="802" alt="Diagramme_classdrawio drawio" src="https://github.com/user-attachments/assets/79f4a9f0-12a6-41f8-ac5c-07abd0844dba" />
+- Element 1
+- Element 2
+- Element 3
 
 ---
 
-## 🔹 Partie 3 : Les diagrammes de sequences
+## 🔹 Part 2: Class Diagram
 
-### 1
+This class diagram presents the different classes of the Hbnb website. You can visualize how the site is structured into four main classes, each with a specific role.
+
+Let's go through the classes shown in this diagram:
+
+First, the `BaseModel` class contains several useful methods that most other classes will use. It holds an ID that every class inherits to uniquely identify its instances, along with CRUD methods: Create, Read, Update, and Delete.
+
+The `User` class contains all information about users of the website. Some of this data is very personal, such as email and password, which is why we made them private. With this class, any user can register, and update or delete their first name, last name, email, and password. We also included an administrator identifier, so the website owner can modify the Hbnb website when logged in.
+
+The `Place` class handles information about the places listed on the website. Each place includes multiple attributes: title, description, location (latitude and longitude), owner, and amenities (note that amenities belong to the `Amenity` class). Each of these attributes can be created, updated, deleted, or listed.
+
+The `Review` class manages messages and ratings that users can leave for places. It includes the place, the user, a rating, and a comment. Just like the `Place` class, all of these fields can be created, updated, deleted, or listed.
+
+Finally, the `Amenity` class contains all the available amenities for places listed on Hbnb. It includes the name and description of the amenity. These fields also support create, update, delete, and list operations.
+
+### Relationships between classes:
+- `User`, `Place`, and `Amenity` have **association** relationships. For example, a user can have several places, but a place belongs to only one user.
+- Between `Place` and `Review`, there's a **composition** relationship — if a place is deleted, all its associated reviews are also deleted.
+- The relation between `BaseModel` and all other classes is a **generalization** — all classes inherit from `BaseModel`.
+
+---
+
+## 🔹 Part 3: Sequence Diagrams
+
+---
+
+The following sequence diagrams show the interactions between the different layers of the application in different scenarios.
+
+### 1. Listing Places
 
 <img width="720" height="456" alt="diagramme-sequence_list_place drawio_720" src="https://github.com/user-attachments/assets/e8088316-0109-44f4-9a0f-425a7d5669ca" />
 
-
-Dans ce diagramme de sequence l'utilistateur recherche des lieux.
-Il fait d'abord la demande a l'API de lire les donnés l'API demande au businessligic layer de chercher les donnés correspondantes.
-Ensuite le business logic layer demande a la data base de lire les donnés une fois trouver il les renvois jusqu'a l'utilisateur sous forme de liste.
-
-### 2
-
-<img width="720" height="570" alt="diagramme-sequence_place_creation drawio_720" src="https://github.com/user-attachments/assets/b21bcc85-595d-42a7-ae61-f0c6258d64ba" />
-
-
-Dans ce diagramme de sequence l'utilisateur créer un lieu.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur
-et si elle n'existe pas il save les donner puis le businesslogic layer valide le lieux et l'API a créer le lieux.
-
-### 3
-
-<img width="720" height="570" alt="diagramme-sequence_register drawio_720" src="https://github.com/user-attachments/assets/43c38b1a-5de0-43fa-b987-435aec6e0bf5" />
-
-
-Dans ce diagramme de sequence l'utilisateur créer un nouveau compte.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui recherche les donnés dans la database si elle existe il renvoie les donner a l'utilisateur
-et si elle n'existe pas il save les donner puis le businesslogic layer valide le compte et l'API le créer.
-
-### 4
-
-<img width="720" height="456" alt="diagramme-sequence_review_submit drawio_720" src="https://github.com/user-attachments/assets/e7ce1833-6236-47f3-8489-8d6f76e627ff" />
-
-
-Dans ce diagramme de sequence l'utilisateur créer une review.
-Il fait d'abord un appelle API de création puis l'API valide les donnés au près du businesslogic layer qui demande a la database de save les donner puis le businesslogic layer valide la review et l'API la créer.
-
-## ✅ Conclusion
-
-> 📌 **Résumé du projet, des enseignements tirés, et des perspectives éventuelles.**
->
-> Mentionnez les limites, les améliorations possibles, ou les suites prévues du projet.
+In this sequence diagram, the user searches for places.
+They first send a read request to the API, which then asks the business logic layer to search for the corresponding data.
+The business logic layer then queries the database. Once the data is found, it's returned all the way back to the user as a list.
 
 ---
 
-## ✉️ Author
+### 2. Creating a Place
+
+<img width="720" height="570" alt="diagramme-sequence_place_creation drawio_720" src="https://github.com/user-attachments/assets/b21bcc85-595d-42a7-ae61-f0c6258d64ba" />
+
+In this sequence diagram, the user creates a new place.
+They first send a creation request to the API, which validates the data through the business logic layer.
+If the data already exists in the database, it's returned to the user.
+If not, the data is saved, the business logic layer validates the new place, and the API confirms its creation.
+
+---
+
+### 3. Registering a New User
+
+<img width="720" height="570" alt="diagramme-sequence_register drawio_720" src="https://github.com/user-attachments/assets/43c38b1a-5de0-43fa-b987-435aec6e0bf5" />
+
+In this diagram, the user creates a new account.
+The user sends a creation request to the API, which checks the validity of the data via the business logic layer.
+If the user already exists in the database, the existing data is returned.
+Otherwise, the new data is saved, the business logic layer confirms the new user, and the API finalizes the creation.
+
+---
+
+### 4. Submitting a Review
+
+<img width="720" height="456" alt="diagramme-sequence_review_submit drawio_720" src="https://github.com/user-attachments/assets/e7ce1833-6236-47f3-8489-8d6f76e627ff" />
+
+In this diagram, the user submits a review.
+They send a creation request to the API, which validates the data via the business logic layer.
+The business logic layer asks the database to save the review, confirms the creation, and the API returns the result to the user.
+
+---
+
+## ✅ Conclusion
+
+> This project allowed us to better understand the internal architecture of a platform like Airbnb, through the modeling of its components and data flows.
+> Using UML diagrams, we were able to clearly express the system's structure, logic, and interactions.
+> This approach is essential for building scalable, maintainable, and well-documented applications.
+
+---
+
+## ✉️ Authors
 
 - [@niimatik](https://github.com/niimatik)
 - [@GuillaumeLerayGirardeau](https://github.com/GuillaumeLerayGirardeau)
