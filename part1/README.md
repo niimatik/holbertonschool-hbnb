@@ -4,15 +4,15 @@
 
 ## 📝 Introduction
 
-> ✍️ As part of this project, we undertook the reproduction of the Airbnb website — renamed here as "Hbnb".
->
-> The goal of this work is to clearly and structurally represent the internal functioning of the application from a technical point of view.
-> The diagrams created allow us to visualize interactions between the system components, data flows, and expected behaviors of both users and the system.
->
-> The main types of diagrams included in this project are:
-> - Package Diagram
-> - Class Diagram
-> - Sequence Diagram
+✍️ As part of this project, we undertook the reproduction of the Airbnb website — renamed here as "Hbnb".
+
+The goal of this work is to clearly and structurally represent the internal functioning of the application from a technical point of view.
+The diagrams created allow us to visualize interactions between the system components, data flows, and expected behaviors of both users and the system.
+
+The main types of diagrams included in this project are:
+- Package Diagram
+- Class Diagram
+- Sequence Diagram
 
 ---
 
