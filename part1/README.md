@@ -103,9 +103,9 @@ The business logic layer asks the database to save the review, confirms the crea
 
 ## ✅ Conclusion
 
-> This project allowed us to better understand the internal architecture of a platform like Airbnb, through the modeling of its components and data flows.
-> Using UML diagrams, we were able to clearly express the system's structure, logic, and interactions.
-> This approach is essential for building scalable, maintainable, and well-documented applications.
+This project allowed us to better understand the internal architecture of a platform like Airbnb, through the modeling of its components and data flows.
+Using UML diagrams, we were able to clearly express the system's structure, logic, and interactions.
+This approach is essential for building scalable, maintainable, and well-documented applications.
 
 ---
 
