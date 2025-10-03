@@ -57,8 +57,6 @@ The relation between the Base Model and all the other classes si a Generalisatio
 
 ## 🔹 Partie 3 : Les diagrammes de sequences
 
----
-
 ### 1
 
 <img width="720" height="456" alt="diagramme-sequence_list_place drawio_720" src="https://github.com/user-attachments/assets/e8088316-0109-44f4-9a0f-425a7d5669ca" />
