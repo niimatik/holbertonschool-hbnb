@@ -16,7 +16,7 @@
 
 ---
 
-## 🔹 Part 1: *Title of the first part*
+## 🔹 Part 1: Package diagram
 
 
 
