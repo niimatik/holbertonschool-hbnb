@@ -32,15 +32,24 @@
 
 ## 🔹 Partie 2 : *Titre de la deuxième partie*
 
-> 🎯 **Objectif :**
->
-> Décrivez les aspects techniques ou fonctionnels abordés dans cette section.
+This class diagram presents the differents classes of the HbnB website. You can now visualise how the website is composed into four different classes, each of them having a specific role in the website structure.
 
-### 🔧 Technologies / Méthodes utilisées :
 
-- Technologie 1
-- Méthode 2
-- Outil 3
+Let's have a quick review of the different classes on this diagram :
+
+First, the Base Model call contains a bunch of usefull methods that most of other classes will use. It contains an ID that every class will have to identify them, alongside the CRUD methods : Create, Read, Update and Delete.
+
+The User class will contain all the informations about each users of the website. Some of these data are very personnal, such as the user email or password, and this is why we decided to make these informations private. With this class, any user can register, and update or delete their first name, last name, email and password. We also included an administrator idendificator, so the website owner can modifiy the HbnB website when connected.
+
+The Place class will handle informations about places available on the website. Each places gather a bunch of information : title, description, place, location (latitude and longitude), owner and amenities (note that the amenites available for each places are part of the Amenity class). Each of these information can be created, updated, deleted or listed.
+
+The Review class will concern messages and notes each user of HbnB can give to a place. It contains a place, a user, a rating and a comment. Such as the Place class, each of these attributes can be created, updated, deleted or listed.
+
+Last but not least, the Amenity class contains all the aminities available for each places on HbnB. It contains the name and the description of the amenity. These two attributes can also be created, updated, deleted or listed.
+
+Concerning the relations between each classes, User, Place and Amenity got an Association relation. For example, a user can have several place, but one place only belong to one user.
+The relation between Place and Review is a Composition relation, meaning that if the place is deleted, every review related to this place will also be deleted.
+The relation between the Base Model and all the other classes si a Generalisation relation, meaning that all classes inherits from the Base Model class.
 
 ---
 
