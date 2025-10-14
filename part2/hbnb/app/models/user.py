@@ -12,8 +12,8 @@ class user(basemodel):
         self.places = []
         self.reviews = []
 
-        def add_places(self, place):
-            self.places.append(place)
+    def add_places(self, place):
+        self.places.append(place)
 
-        def add_reviews(self, review):
-            self.reviews.append(review)
+    def add_reviews(self, review):
+        self.reviews.append(review)
