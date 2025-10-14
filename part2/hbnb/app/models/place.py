@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from base_class import basemodel
 
-class Place(BaseModel):
+class Place(basemodel):
     def __init__(self, title, description, price, latitude, longitude, owner):
         super().__init__()
         self.title = title
