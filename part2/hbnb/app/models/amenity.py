@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from app.models.base_class import basemodel
 
-class amenity(basemodel):
+class Amenity(basemodel):
     def __init__(self, name):
         super().__init__()
         self.name = name
