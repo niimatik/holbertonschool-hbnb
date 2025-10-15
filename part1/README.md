@@ -51,6 +51,8 @@ Finally, the `Amenity` class contains all the available amenities for places lis
 - Between `Place` and `Review`, there's a **composition** relationship — if a place is deleted, all its associated reviews are also deleted.
 - The relation between `BaseModel` and all other classes is a **generalization** — all classes inherit from `BaseModel`.
 
+  <img width="729" height="802" alt="Diagramme_classdrawio drawio" src="https://github.com/user-attachments/assets/9b2a47a9-74b1-4a26-aa8c-31d9311f0c47" />
+
 ---
 
 ## 🔹 Part 3: Sequence Diagrams
