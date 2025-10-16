@@ -31,6 +31,20 @@ class UserList(Resource):
         new_user = facade.create_user(user_data)
         return {'id': new_user.id, 'first_name': new_user.first_name,
                 'last_name': new_user.last_name, 'email': new_user.email}, 201
+    @api.response(200, 'List of users retrieved successfully')
+    def get(self):
+        """Retrieve a list of all users"""
+        # Placeholder for logic to return a list of all amenities
+        all_users = facade.get_all_users()
+        user_list = []
+        for user in all_users:
+            user_list.append({
+                'id': user.id,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email,
+            })
+        return user_list, 200
 
 @api.route('/<user_id>')
 class UserResource(Resource):
@@ -41,5 +55,20 @@ class UserResource(Resource):
         user = facade.get_user(user_id)
         if not user:
             return {'error': 'User not found'}, 404
+        return {'id': user.id, 'first_name': user.first_name,
+                'last_name': user.last_name, 'email': user.email}, 200
+
+    @api.expect(user_model)
+    @api.response(200, 'user updated successfully')
+    @api.response(404, 'user not found')
+    @api.response(400, 'Invalid input data')
+    def put(self, user_id):
+        """Update an user's information"""
+        # Placeholder for the logic to update an user by ID
+        user_data = api.payload
+        user = facade.get_user(user_id)
+        if not user:
+            return {'error': 'user not found'}, 404
+        facade.update_user(user_id, user_data)
         return {'id': user.id, 'first_name': user.first_name,
                 'last_name': user.last_name, 'email': user.email}, 200
