@@ -39,17 +39,20 @@ class PlaceList(Resource):
     def post(self):
         """Register a new place"""
         # Placeholder for the logic to register a new place
-        place_data = api.payload
-        new_place = facade.create_place(place_data)
-        return {
-            'id': new_place.id,
-            'title': new_place.title,
-            'description': new_place.description,
-            'price': new_place.price,
-            'latitude': new_place.latitude,
-            'longitude': new_place.longitude,
-            'owner_id': new_place.owner_id,
-        }, 201
+        try:
+            place_data = api.payload
+            new_place = facade.create_place(place_data)
+            return {
+                'id': new_place.id,
+                'title': new_place.title,
+                'description': new_place.description,
+                'price': new_place.price,
+                'latitude': new_place.latitude,
+                'longitude': new_place.longitude,
+                'owner_id': new_place.owner_id,
+            }, 201
+        except Exception:
+            return {"error": "Invalid input data"}, 400
 
     @api.response(200, 'List of places retrieved successfully')
     def get(self):
@@ -108,27 +111,34 @@ class PlaceResource(Resource):
     def put(self, place_id):
         """Update a place's information"""
         # Placeholder for the logic to update a place by ID
-        place_data = api.payload
-        place = facade.get_place(place_id)
-        if not place:
-            return {"error": "Place not found"}, 404
-        facade.update_place(place_id, place_data)
-        return {"message": "Place updated successfully"}, 200
+        try:
+            place_data = api.payload
+            place = facade.get_place(place_id)
+            if not place:
+                return {"error": "Place not found"}, 404
+            facade.update_place(place_id, place_data)
+            return {"message": "Place updated successfully"}, 200
+        except Exception:
+            return {"error": "Invalid input data"}, 400
 
 
     @api.expect(amenity_model)
     @api.response(404, 'Place not found')
     @api.response(404, 'Amenity not found')
+    @api.response(400, 'Invalid input data')
     @api.response(200, 'Amenity added successfully')
     def post(self, place_id):
         """Add a new amenity"""
-        place = facade.get_place(place_id)
-        if not place:
-            return {"error": "Place not found"}, 404
-        amenity = api.payload
-        all_amenities = facade.get_all_amenities()
-        for i in all_amenities:
-            if i.name == amenity["name"]:
-                place.add_amenity(i.id)
-                return {"message": "Amenity added successfully"}, 200
-        return {"error": "Amenity not found"}, 404
+        try:
+            place = facade.get_place(place_id)
+            if not place:
+                return {"error": "Place not found"}, 404
+            amenity = api.payload
+            all_amenities = facade.get_all_amenities()
+            for i in all_amenities:
+                if i.name == amenity["name"]:
+                    place.add_amenity(i.id)
+                    return {"message": "Amenity added successfully"}, 200
+            return {"error": "Amenity not found"}, 404
+        except Exception:
+            return {"error": "Invalid input data"}, 400

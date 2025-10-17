@@ -28,8 +28,8 @@ class ReviewList(Resource):
                 "user_id": review.user_id,
                 "place_id": review.place_id
             }, 201
-        except Exception as e:
-            return {"error": str(e)}, 400
+        except Exception:
+            return {"error": "Invalid input data"}, 400
 
     @api.response(200, 'List of reviews retrieved successfully')
     def get(self):
@@ -76,8 +76,8 @@ class ReviewResource(Resource):
         try:
             facade.update_review(review_id, data)
             return {"message": "Review updated successfully"}, 200
-        except Exception as e:
-            return {"error": str(e)}, 400
+        except Exception:
+            return {"error": "Invalid input data"}, 400
 
     @api.response(200, 'Review deleted successfully')
     @api.response(404, 'Review not found')
