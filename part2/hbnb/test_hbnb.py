@@ -64,8 +64,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.get(adress)
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.get(address)
         self.assertEqual(response.status_code, 200)
 
     def test_get_user_by_id_invalid_id(self):
@@ -79,8 +79,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.put(adress, json={
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "Doe",
             "email": "janedoe@gmail.com",
@@ -104,8 +104,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.put(adress, json={
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.put(address, json={
             "first_name": "",
             "last_name": "Doe",
             "email": "janedoe@gmail.com",
@@ -120,8 +120,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.put(adress, json={
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "",
             "email": "janedoe@gmail.com",
@@ -136,8 +136,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.put(adress, json={
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "Doe",
             "email": "not_an_email",
@@ -152,8 +152,8 @@ class test_user_endpoint(unittest.TestCase):
             "email": "janedoe@gmail.com",
             "is_admin": False
         })
-        adress = f"/api/v1/users/{user.id}"
-        response = self.client.put(adress, json={
+        address = f"/api/v1/users/{user.id}"
+        response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "Doe",
             "email": "janedoe@gmail.com",
@@ -173,16 +173,48 @@ class test_amenities_endpoint(unittest.TestCase):
         })
         self.assertEqual(response.status_code, 201)
 
-    def test_create_invalide_amenity(self):
+    def test_create_invalid_amenity(self):
         response = self.client.post('/api/v1/amenities/', json={
             "name": ""
         })
         self.assertEqual(response.status_code, 400)
 
-    def test_get_amenity(self):
+    def test_get_all_amenity(self):
         response = self.client.get('/api/v1/amenities/')
         self.assertEqual(response.status_code, 200)
 
+    def test_get_amenity_by_id(self):
+        amenity = facade.create_amenity({"name": "Wi-fi"})
+        address = f'/api/v1/amenities/{amenity.id}'
+        response = self.client.get(address)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_amenity_by_id_invalid_id(self):
+        response = self.client.get('/api/v1/amenities/azerty123456')
+        self.assertEqual(response.status_code, 404)
+
+    def test_update_amenity(self):
+        amenity = facade.create_amenity({"name": "Wi-fi"})
+        address = f'/api/v1/amenities/{amenity.id}'
+        response = self.client.put(address, json={
+            "name": "TV"
+        })
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_amenity_invalid_name(self):
+        amenity = facade.create_amenity({"name": "Wi-fi"})
+        address = f'/api/v1/amenities/{amenity.id}'
+        response = self.client.put(address, json={
+            "name": ""
+        })
+        self.assertEqual(response.status_code, 400)
+
+    def test_update_amenity_invalid_id(self):
+        address = f'/api/v1/amenities/azerty123456'
+        response = self.client.put(address, json={
+            "name": "TV"
+        })
+        self.assertEqual(response.status_code, 404)
 
 class test_place_endpoint(unittest.TestCase):
 

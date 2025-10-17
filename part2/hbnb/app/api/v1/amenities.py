@@ -63,6 +63,8 @@ class AmenityResource(Resource):
         # Placeholder for the logic to update an amenity by ID
         try:
             amenity_data = api.payload
+            if not amenity_data["name"]:
+                raise ValueError("Name must not be empty !")
             amenity = facade.get_amenity(amenity_id)
             if not amenity:
                 return {'error': 'Amenity not found'}, 404
