@@ -4,7 +4,7 @@ from app.models.base_class import basemodel
 
 class Place(basemodel):
     def __init__(self, title, description, price,
-                 latitude, longitude, owner_id, amenities):
+                 latitude, longitude, owner_id):
         super().__init__()
         if not title:
             raise ValueError("title is empty !")
