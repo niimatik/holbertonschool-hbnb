@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from app.models.base_class import basemodel
 
+
 class User(basemodel):
     def __init__(self, first_name, last_name, email, is_admin):
         super().__init__()

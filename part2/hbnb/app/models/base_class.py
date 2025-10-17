@@ -2,6 +2,7 @@
 import uuid
 from datetime import datetime
 
+
 class basemodel:
     def __init__(self):
         self.id = str(uuid.uuid4())
@@ -17,7 +18,7 @@ class basemodel:
         for key, value in data.items():
             if hasattr(self, key):
                 setattr(self, key, value)
-        self.save()  # Update the updated_at timestamp
+        self.save()
 
     def delete(self):
-        del(self)
+        del (self)
