@@ -1,5 +1,6 @@
 import unittest
 from app import create_app
+from app.services import facade
 
 class test_user_endpoint(unittest.TestCase):
 
@@ -11,7 +12,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "jane.doe@example.com",
+            "email": "janedoe@gmail.com",
             "is_admin": False
         })
         self.assertEqual(response.status_code, 201)
@@ -47,15 +48,118 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "john",
             "last_name": "doe",
-            "email": "john.doe@exemple.com",
+            "email": "johndoe@gmail.com",
             "is_admin": ""
         })
         self.assertEqual(response.status_code, 400)
 
     def test_get_user(self):
-        response = self.client.get('/api/users/')
-        self.assertEqual(response.status_code, 201)
+        response = self.client.get('/api/v1/users/')
+        self.assertEqual(response.status_code, 200)
 
+    def test_get_user_by_id(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.get(adress)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_user_by_id_invalid_id(self):
+        response = self.client.get('/api/v1/users/azerty123456')
+        self.assertEqual(response.status_code, 404)
+
+    def test_update_user(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.put(adress, json={
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False           
+        })
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_user_invalid_id(self):
+        response = self.client.put('/api/v1/users/azerty123456', json={
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False           
+        })
+        self.assertEqual(response.status_code, 404)
+
+    def test_update_user_invalid_first_name(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.put(adress, json={
+            "first_name": "",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False           
+        })
+        self.assertEqual(response.status_code, 400)
+
+    def test_update_user_invalid_last_name(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.put(adress, json={
+            "first_name": "John",
+            "last_name": "",
+            "email": "janedoe@gmail.com",
+            "is_admin": False           
+        })
+        self.assertEqual(response.status_code, 400)
+
+    def test_update_user_invalid_email(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.put(adress, json={
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "not_an_email",
+            "is_admin": False           
+        })
+        self.assertEqual(response.status_code, 400)
+
+    def test_update_user_invalid_is_admin(self):
+        user = facade.create_user({
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": False
+        })
+        adress = f"/api/v1/users/{user.id}"
+        response = self.client.put(adress, json={
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "janedoe@gmail.com",
+            "is_admin": "not_a_bool"           
+        })
+        self.assertEqual(response.status_code, 400)
 
 class test_amenities_endpoint(unittest.TestCase):
 
@@ -76,8 +180,8 @@ class test_amenities_endpoint(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_get_amenity(self):
-        response = self.client.get('/api/amenities/')
-        self.assertEqual(response.status_code, 201)
+        response = self.client.get('/api/v1/amenities/')
+        self.assertEqual(response.status_code, 200)
 
 
 class test_place_endpoint(unittest.TestCase):
@@ -87,7 +191,7 @@ class test_place_endpoint(unittest.TestCase):
         self.client = self.app.test_client()
 
     def test_create_places(self):
-        response = self.client.post('/api/v1/palces/', json={
+        response = self.client.post('/api/v1/places/', json={
             "title": "Cozy Apartment",
             "description": "A nice place to stay",
             "price": 100.0,
@@ -164,8 +268,8 @@ class test_place_endpoint(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_get_place(self):
-        response = self.client.get('/api/places/')
-        self.assertEqual(response.status_code, 201)
+        response = self.client.get('/api/v1/places/')
+        self.assertEqual(response.status_code, 200)
 
 
 class test_review_endpoint(unittest.TestCase):
@@ -175,11 +279,19 @@ class test_review_endpoint(unittest.TestCase):
         self.client = self.app.test_client()
 
     def test_create_review(self):
+        place = facade.create_place({
+                                    "title": "Cozy Apartment",
+                                    "description": "A nice place to stay",
+                                    "price": 100.0,
+                                    "latitude": 37.7749,
+                                    "longitude": -122.4194,
+                                    "owner_id": "azertyujikl"
+                                    }) 
         response = self.client.post('/api/v1/reviews/', json={
             "text": "Great place to stay!",
             "rating": 5,
             "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "place_id": "1fa85f64-5717-4562-b3fc-2c963f66afa6"
+            "place_id": place.id
         })
         self.assertEqual(response.status_code, 201)
 
@@ -220,5 +332,8 @@ class test_review_endpoint(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_get_review(self):
-        response = self.client.get('/api/reviews/')
-        self.assertEqual(response.status_code, 201)
+        response = self.client.get('/api/v1/reviews/')
+        self.assertEqual(response.status_code, 200)
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from email_validator import validate_email, EmailNotValidError
 
 api = Namespace('users', description='User operations')
 
@@ -70,10 +71,19 @@ class UserResource(Resource):
     def put(self, user_id):
         """Update an user's information"""
         # Placeholder for the logic to update an user by ID
-        user_data = api.payload
-        user = facade.get_user(user_id)
-        if not user:
-            return {'error': 'user not found'}, 404
-        facade.update_user(user_id, user_data)
-        return {'id': user.id, 'first_name': user.first_name,
-                'last_name': user.last_name, 'email': user.email}, 200
+        try:
+            user_data = api.payload
+            if (not user_data['first_name'] or not user_data['last_name'] or not user_data['email']):
+                raise ValueError("Empty value !")
+            if not validate_email(user_data['email']):
+                raise EmailNotValidError("Incorrect email !")
+            if user_data['is_admin'] == "" or type(user_data['is_admin']) is not bool:
+                raise ValueError("is_admin must be True or False !")
+            user = facade.get_user(user_id)
+            if not user:
+                return {'error': 'user not found'}, 404
+            facade.update_user(user_id, user_data)
+            return {'id': user.id, 'first_name': user.first_name,
+                    'last_name': user.last_name, 'email': user.email}, 200
+        except Exception:
+            return {"error": "Invalid input data"}, 400
