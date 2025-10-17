@@ -17,13 +17,16 @@ class AmenityList(Resource):
     def post(self):
         """Register a new amenity"""
         # Placeholder for the logic to register a new amenity
-        amenity_data = api.payload
-        existing_amenity = facade.get_all_amenities()
-        for i in existing_amenity:
-            if i.name == amenity_data['name']:
-                return {'error': 'amenity already exist'}, 400
-        new_amenity = facade.create_amenity(amenity_data)
-        return {'id': new_amenity.id, 'name': new_amenity.name}, 201
+        try:
+            amenity_data = api.payload
+            existing_amenity = facade.get_all_amenities()
+            for i in existing_amenity:
+                if i.name == amenity_data['name']:
+                    return {'error': 'Amenity already exist'}, 400
+            new_amenity = facade.create_amenity(amenity_data)
+            return {'id': new_amenity.id, 'name': new_amenity.name}, 201
+        except Exception:
+            return {"error": "Invalid input data"}, 400
 
     @api.response(200, 'List of amenities retrieved successfully')
     def get(self):
@@ -58,11 +61,12 @@ class AmenityResource(Resource):
     def put(self, amenity_id):
         """Update an amenity's information"""
         # Placeholder for the logic to update an amenity by ID
-        amenity_data = api.payload
-        if type(amenity_data['name']) is not str:
-            return {'error': 'input data is invalid'}, 400
-        amenity = facade.get_amenity(amenity_id)
-        if not amenity:
-            return {'error': 'Amenity not found'}, 404
-        facade.update_amenity(amenity_id, amenity_data)
-        return {"message": "Amenity updated successfully"}, 200
+        try:
+            amenity_data = api.payload
+            amenity = facade.get_amenity(amenity_id)
+            if not amenity:
+                return {'error': 'Amenity not found'}, 404
+            facade.update_amenity(amenity_id, amenity_data)
+            return {"message": "Amenity updated successfully"}, 200
+        except Exception:
+            return {"error": "Invalid input data"}, 400
