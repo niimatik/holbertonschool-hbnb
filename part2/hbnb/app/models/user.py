@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from app.models.base_class import basemodel
-import email_validator
 
 class User(basemodel):
     def __init__(self, first_name, last_name, email, is_admin):
@@ -9,8 +8,6 @@ class User(basemodel):
             raise ValueError("Empty value !")
         self.first_name = first_name
         self.last_name = last_name
-        if not email_validator.validate_email(email):
-            return {"error": "email is not valid !"}, 400
         self.email = email
         self.is_admin = is_admin
         self.places = []
