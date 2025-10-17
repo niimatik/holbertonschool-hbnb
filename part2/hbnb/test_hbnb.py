@@ -1,6 +1,7 @@
 import unittest
 from app import create_app
 
+
 class test_user_endpoint(unittest.TestCase):
 
     def setUp(self):
