@@ -24,10 +24,7 @@ class Place(basemodel):
             )
         self.longitude = longitude
         self.owner_id = owner_id
-        if amenities:
-            self.amenities = amenities
-        else:
-            self.amenities = []  # List to store related amenities
+        self.amenities = []  # List to store related amenities
         self.reviews = []  # List to store related reviews
 
     def add_review(self, review):

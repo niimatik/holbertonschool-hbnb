@@ -100,6 +100,7 @@ class PlaceResource(Resource):
             "amenities": amenities_list
         }, 200
 
+
     @api.expect(place_model)
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
@@ -112,4 +113,22 @@ class PlaceResource(Resource):
         if not place:
             return {"error": "Place not found"}, 404
         facade.update_place(place_id, place_data)
-        return {"message": "Place updated successfully"}, 200
+        return { "message": "Place updated successfully"}, 200
+
+
+    @api.expect(amenity_model)
+    @api.response(404, 'Place not found')
+    @api.response(404, 'Amenity not found')
+    @api.response(200, 'Amenity added successfully')
+    def post(self, place_id):
+        """Add a new amenity"""
+        place = facade.get_place(place_id)
+        if not place:
+            return {"error": "Place not found"}, 404
+        amenity = api.payload
+        all_amenities = facade.get_all_amenities()
+        for i in all_amenities:
+            if i.name == amenity["name"]:
+                place.add_amenity(i.id)
+                return {"message": "Amenity added successfully"}
+        return {"error": "Amenity not found"}, 404
