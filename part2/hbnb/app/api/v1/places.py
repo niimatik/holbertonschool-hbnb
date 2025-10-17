@@ -113,7 +113,7 @@ class PlaceResource(Resource):
         if not place:
             return {"error": "Place not found"}, 404
         facade.update_place(place_id, place_data)
-        return { "message": "Place updated successfully"}, 200
+        return {"message": "Place updated successfully"}, 200
 
 
     @api.expect(amenity_model)
@@ -130,5 +130,5 @@ class PlaceResource(Resource):
         for i in all_amenities:
             if i.name == amenity["name"]:
                 place.add_amenity(i.id)
-                return {"message": "Amenity added successfully"}
+                return {"message": "Amenity added successfully"}, 200
         return {"error": "Amenity not found"}, 404
