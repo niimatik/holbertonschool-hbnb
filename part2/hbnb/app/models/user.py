@@ -2,6 +2,7 @@
 from app.models.base_class import basemodel
 import email_validator
 
+
 class User(basemodel):
     def __init__(self, first_name, last_name, email, is_admin):
         super().__init__()

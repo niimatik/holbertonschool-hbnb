@@ -13,6 +13,7 @@ user_model = api.model('User', {
                            description='Email of the user')
 })
 
+
 @api.route('/')
 class UserList(Resource):
     @api.expect(user_model, validate=True)
@@ -31,6 +32,7 @@ class UserList(Resource):
         new_user = facade.create_user(user_data)
         return {'id': new_user.id, 'first_name': new_user.first_name,
                 'last_name': new_user.last_name, 'email': new_user.email}, 201
+
     @api.response(200, 'List of users retrieved successfully')
     def get(self):
         """Retrieve a list of all users"""
@@ -45,6 +47,7 @@ class UserList(Resource):
                 'email': user.email,
             })
         return user_list, 200
+
 
 @api.route('/<user_id>')
 class UserResource(Resource):

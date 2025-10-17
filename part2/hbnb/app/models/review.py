@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from app.models.base_class import basemodel
 
+
 class Review(basemodel):
     def __init__(self, text, rating, place, user):
         super().__init__()
