@@ -41,6 +41,8 @@ class PlaceList(Resource):
         # Placeholder for the logic to register a new place
         try:
             place_data = api.payload
+            if not facade.get_user(place_data["owner_id"]):
+                raise ValueError("User does not exist")
             new_place = facade.create_place(place_data)
             return {
                 'id': new_place.id,
@@ -113,6 +115,10 @@ class PlaceResource(Resource):
         # Placeholder for the logic to update a place by ID
         try:
             place_data = api.payload
+            if not place_data['title'] or not place_data['description']:
+                raise ValueError("Some fields are empty !")
+            if place_data['price'] < 0:
+                raise ValueError("Your place must cost at least 0€")
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404
