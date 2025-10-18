@@ -5,9 +5,16 @@ This directory contains all the task 2 of the HBnB project. You will find down b
 ## Table of Contents
 
 - [Overall project description](#overall-project-description)
-
-**About the projects :**
-
+    - [Project Structure](#project_structure)
+    - [Run the application](#run_the_application)
+<br>
+- [Core Business Logic Classes](#core_business_logic_classes)
+    - [Base Class](#base_class)
+    - [User](#user)
+    - [Amenity](#amenity)
+    - [Place](#place)
+    - [Review](#review)
+<br>
 - [Software and Language](#software-and-language)
 - [Authors](#authors)
 
