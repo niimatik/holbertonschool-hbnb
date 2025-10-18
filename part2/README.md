@@ -5,15 +5,20 @@ This directory contains all the task 2 of the HBnB project. You will find down b
 ## Table of Contents
 
 - [Overall project description](#overall-project-description)
-
-**About the projects :**
-
-- [Software and Language](#software-and-language)
+    - [Project Structure](#project-structure)
+    - [Run the application](#run-the-application)
+- [Core Business Logic Classes](#core-business-logic-classes)
+    - [Base Class](#base-class)
+    - [User](#user)
+    - [Amenity](#amenity)
+    - [Place](#place)
+    - [Review](#review)
+- [Unittest Documentation](#unittest-documentation)
 - [Authors](#authors)
 
 ## Overall project description
 
- - **Project Structure**
+### Project Structure
 
 The HBnB project is composed of several directories and sub-directories, each of them having a precise role in the application's works.  
 Here is a simple representation of the purpose of each directory :
@@ -29,8 +34,7 @@ Here is a simple representation of the purpose of each directory :
 | `config.py`            | Used for configuring environment variables and application settings.                             |
 | `requirements.txt`     | Lists all the Python packages required for the project.                                          |
 | `README.md`            | Provides a brief overview of the project.                                                        |
-
-- **Run the application**
+### Run the application
 
 To run properly the HBnB application, be sure to follow these steps correctly :
 - Install the required packages contained in *requirements.txt* :
@@ -234,3 +238,12 @@ review1 = Review(
     user="rhjiko5l423kn6fd45y"
 )
 ````
+## Unittest Documentation
+
+
+
+## Authors
+
+- [@niimatik](https://github.com/niimatik)
+- [@GuillaumeLerayGirardeau](https://github.com/GuillaumeLerayGirardeau)
+- [@Sam224-Amtro](https://github.com/Sam224-Amtro)
