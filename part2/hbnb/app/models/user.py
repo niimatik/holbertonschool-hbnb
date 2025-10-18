@@ -2,6 +2,7 @@
 from app.models.base_class import basemodel
 from email_validator import validate_email, EmailNotValidError
 
+
 class User(basemodel):
     def __init__(self, first_name, last_name, email, is_admin):
         super().__init__()

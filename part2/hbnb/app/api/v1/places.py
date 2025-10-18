@@ -105,7 +105,6 @@ class PlaceResource(Resource):
             "amenities": amenities_list
         }, 200
 
-
     @api.expect(place_model)
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
@@ -126,7 +125,6 @@ class PlaceResource(Resource):
             return {"message": "Place updated successfully"}, 200
         except Exception:
             return {"error": "Invalid input data"}, 400
-
 
     @api.expect(amenity_model)
     @api.response(404, 'Place not found')

@@ -63,13 +63,15 @@ class HBnBFacade:
     """
 
     def create_place(self, place_data):
-        # Placeholder for logic to create a place, including validation for price, latitude, and longitude
+        # Placeholder for logic to create a place,
+        # including validation for price, latitude, and longitude
         place = Place(**place_data)
         self.place_repo.add(place)
         return place
 
     def get_place(self, place_id):
-        # Placeholder for logic to retrieve a place by ID, including associated owner and amenities
+        # Placeholder for logic to retrieve a place by ID,
+        # including associated owner and amenities
         return self.place_repo.get(place_id)
 
     def get_all_places(self):
@@ -85,7 +87,8 @@ class HBnBFacade:
     """
 
     def create_review(self, review_data):
-        # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
+        # Placeholder for logic to create a review,
+        # including validation for user_id, place_id, and rating
         review = Review(**review_data)
         self.review_repo.add(review)
         place = self.place_repo.get(review.place_id)
