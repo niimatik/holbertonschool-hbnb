@@ -240,8 +240,8 @@ review1 = Review(
 ````
 ## Unittest Documentation
 
-The following documentation is a spreadsheat of the expectation and resulte of the different test we use on our code.
-In the last column you can see the actual result we have for the test of this row so if a test not working you can see it there.
+The following documentation is a spreadsheat of the expectations and results of the different tests we use on our code.
+In the last column you can see the actual result we have for the test of this row, so if a test is not working you can see it there.
 
 # User unittest documentation
 
