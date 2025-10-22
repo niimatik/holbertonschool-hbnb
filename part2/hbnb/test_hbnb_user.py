@@ -13,8 +13,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "John",
             "last_name": "Doe",
-            "email": "janedoe@gmail.com",
-            "is_admin": False
+            "email": "janedoe@gmail.com"
         })
         self.assertEqual(response.status_code, 201)
 
@@ -22,8 +21,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "",
             "last_name": "doe",
-            "email": "john.doe@exemple.com",
-            "is_admin": False
+            "email": "john.doe@exemple.com"
         })
         self.assertEqual(response.status_code, 400)
 
@@ -31,8 +29,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "john",
             "last_name": "",
-            "email": "john.doe@exemple.com",
-            "is_admin": False
+            "email": "john.doe@exemple.com"
         })
         self.assertEqual(response.status_code, 400)
 
@@ -40,17 +37,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.post('/api/v1/users/', json={
             "first_name": "john",
             "last_name": "doe",
-            "email": "invalid-email",
-            "is_admin": False
-        })
-        self.assertEqual(response.status_code, 400)
-
-    def test_create_user_invalid_is_admin(self):
-        response = self.client.post('/api/v1/users/', json={
-            "first_name": "john",
-            "last_name": "doe",
-            "email": "johndoe@gmail.com",
-            "is_admin": ""
+            "email": "invalid-email"
         })
         self.assertEqual(response.status_code, 400)
 
@@ -62,8 +49,7 @@ class test_user_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Moe",
-            "email": "janemoe@gmail.com",
-            "is_admin": False
+            "email": "janemoe@gmail.com"
         })
         address = f"/api/v1/users/{user.id}"
         response = self.client.get(address)
@@ -77,15 +63,13 @@ class test_user_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Loe",
-            "email": "janeloe@gmail.com",
-            "is_admin": False
+            "email": "janeloe@gmail.com"
         })
         address = f"/api/v1/users/{user.id}"
         response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "Loe",
-            "email": "johnloe@gmail.com",
-            "is_admin": False
+            "email": "johnloe@gmail.com"
         })
         self.assertEqual(response.status_code, 200)
 
@@ -93,8 +77,7 @@ class test_user_endpoint(unittest.TestCase):
         response = self.client.put('/api/v1/users/azerty123456', json={
             "first_name": "John",
             "last_name": "Loe",
-            "email": "johnloe@gmail.com",
-            "is_admin": False
+            "email": "johnloe@gmail.com"
         })
         self.assertEqual(response.status_code, 404)
 
@@ -102,15 +85,13 @@ class test_user_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Loe",
-            "email": "janeloe@gmail.com",
-            "is_admin": False
+            "email": "janeloe@gmail.com"
         })
         address = f"/api/v1/users/{user.id}"
         response = self.client.put(address, json={
             "first_name": "",
             "last_name": "Loe",
-            "email": "johnloe@gmail.com",
-            "is_admin": False
+            "email": "johnloe@gmail.com"
         })
         self.assertEqual(response.status_code, 400)
 
@@ -118,15 +99,13 @@ class test_user_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Loe",
-            "email": "janeloe@gmail.com",
-            "is_admin": False
+            "email": "janeloe@gmail.com"
         })
         address = f"/api/v1/users/{user.id}"
         response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "",
-            "email": "johnloe@gmail.com",
-            "is_admin": False
+            "email": "johnloe@gmail.com"
         })
         self.assertEqual(response.status_code, 400)
 
@@ -134,34 +113,15 @@ class test_user_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Loe",
-            "email": "janeloe@gmail.com",
-            "is_admin": False
+            "email": "janeloe@gmail.com"
         })
         address = f"/api/v1/users/{user.id}"
         response = self.client.put(address, json={
             "first_name": "John",
             "last_name": "Loe",
-            "email": "not_an_email",
-            "is_admin": False
+            "email": "not_an_email"
         })
         self.assertEqual(response.status_code, 400)
-
-    def test_update_user_invalid_is_admin(self):
-        user = facade.create_user({
-            "first_name": "Jane",
-            "last_name": "Loe",
-            "email": "janeloe@gmail.com",
-            "is_admin": False
-        })
-        address = f"/api/v1/users/{user.id}"
-        response = self.client.put(address, json={
-            "first_name": "John",
-            "last_name": "Loe",
-            "email": "johnloe@gmail.com",
-            "is_admin": "not_a_bool"
-        })
-        self.assertEqual(response.status_code, 400)
-
 
 if __name__ == "__main__":
     unittest.main()
