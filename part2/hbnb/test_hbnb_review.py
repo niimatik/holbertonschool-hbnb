@@ -13,8 +13,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -36,8 +35,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -59,8 +57,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -82,8 +79,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         place = facade.create_place({
             "title": "Nice Apartment",
@@ -105,8 +101,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         response = self.client.post('/api/v1/reviews/', json={
             "text": "Great place to stay!",
@@ -238,8 +233,7 @@ class test_review_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "John",
             "last_name": "Lemon",
-            "email": "lemon@gmail.com",
-            "is_admin": False
+            "email": "lemon@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
