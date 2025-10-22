@@ -84,12 +84,6 @@ class UserResource(Resource):
 
             if not validate_email(user_data['email']):
                 raise EmailNotValidError("Incorrect email !")
-
-            if (
-                user_data['is_admin'] == ""
-                or type(user_data['is_admin']) is not bool
-            ):
-                raise ValueError("is_admin must be True or False !")
             user = facade.get_user(user_id)
             if not user:
                 return {'error': 'user not found'}, 404
