@@ -1,10 +1,5 @@
 flask
 flask-restx
 email-validator
-SQLAlchemy
 flask-bcrypt
-mysql-server
-python3-dev
-libmysqlclient-dev
-zlib1g-dev
-mysqlclient
+flask-jwt-extended
