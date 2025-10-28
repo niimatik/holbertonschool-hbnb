@@ -1,6 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
-from email_validator import validate_email, EmailNotValidError
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 
 api = Namespace('users', description='User operations')
 
@@ -70,23 +71,26 @@ class UserResource(Resource):
     @api.response(200, 'user updated successfully')
     @api.response(404, 'user not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, user_id):
         """Update an user's information"""
         # Placeholder for the logic to update an user by ID
         try:
+            current_user = get_jwt_identity()
             user_data = api.payload
-            if (
-                not user_data['first_name']
-                or not user_data['last_name']
-                or not user_data['email']
-            ):
-                raise ValueError("Empty value !")
-
-            if not validate_email(user_data['email']):
-                raise EmailNotValidError("Incorrect email !")
+            if "first_name" in user_data:
+                if not user_data["first_name"]:
+                    return {"error": "You must have a first name !"}, 400
+            if "last_name" in user_data:
+                if not user_data["last_name"]:
+                    return {"error": "You must have a last name !"}, 400
+            if "email" in user_data or "password" in user_data:
+                return {'error': 'You cannot modify email or password.'}, 400
             user = facade.get_user(user_id)
             if not user:
                 return {'error': 'user not found'}, 404
+            if user.id != current_user:
+                return {'error': 'Unauthorized action.'}, 403
             facade.update_user(user_id, user_data)
             return {'id': user.id, 'first_name': user.first_name,
                     'last_name': user.last_name, 'email': user.email}, 200

@@ -13,8 +13,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         response = self.client.post('/api/v1/places/', json={
             "title": "Cozy Apartment",
@@ -111,8 +110,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -134,8 +132,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "jane@gmail.com",
-            "is_admin": False
+            "email": "jane@gmail.com"
         })
         place = facade.create_place({
             "title": "Apartment",
@@ -157,8 +154,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -180,8 +176,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -203,8 +198,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -234,8 +228,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -254,8 +247,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
@@ -273,8 +265,7 @@ class test_place_endpoint(unittest.TestCase):
         user = facade.create_user({
             "first_name": "Jane",
             "last_name": "Doe",
-            "email": "janoe@gmail.com",
-            "is_admin": False
+            "email": "janoe@gmail.com"
         })
         place = facade.create_place({
             "title": "Cozy Apartment",
