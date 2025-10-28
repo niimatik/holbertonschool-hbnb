@@ -1,4 +1,5 @@
 from flask_restx import Namespace, Resource, fields
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services import facade
 
 api = Namespace('places', description='Place operations')
@@ -36,13 +37,17 @@ class PlaceList(Resource):
     @api.expect(place_model)
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def post(self):
         """Register a new place"""
         # Placeholder for the logic to register a new place
         try:
+            current_user = get_jwt_identity()
             place_data = api.payload
             if not facade.get_user(place_data["owner_id"]):
                 raise ValueError("User does not exist")
+            if place_data["owner_id"] != current_user:
+                return {'error': 'Unauthorized action'}, 403
             new_place = facade.create_place(place_data)
             return {
                 'id': new_place.id,
@@ -109,18 +114,27 @@ class PlaceResource(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, place_id):
         """Update a place's information"""
         # Placeholder for the logic to update a place by ID
         try:
+            current_user = get_jwt_identity()
             place_data = api.payload
-            if not place_data['title'] or not place_data['description']:
-                raise ValueError("Some fields are empty !")
-            if place_data['price'] < 0:
-                raise ValueError("Your place must cost at least 0€")
+            if "title" in place_data:
+                if not place_data["title"]:
+                    return {"error": "Your place must have a title"}, 400
+            if "description" in place_data:
+                if not place_data["description"]:
+                    return {"error": "Your place must have a description"}, 400
+            if "price" in place_data:
+                if place_data['price'] < 0:
+                    return {"error": "Your place must cost at least 0€"}, 400
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404
+            if place.owner_id != current_user:
+                return {'error': 'Unauthorized action'}, 403
             facade.update_place(place_id, place_data)
             return {"message": "Place updated successfully"}, 200
         except Exception:
@@ -131,12 +145,16 @@ class PlaceResource(Resource):
     @api.response(404, 'Amenity not found')
     @api.response(400, 'Invalid input data')
     @api.response(200, 'Amenity added successfully')
+    @jwt_required()
     def post(self, place_id):
         """Add a new amenity"""
         try:
+            current_user = get_jwt_identity()
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404
+            if place.owner_id != current_user:
+                return {"error": "Unauthorized action"}, 403
             amenity = api.payload
             all_amenities = facade.get_all_amenities()
             for i in all_amenities:
