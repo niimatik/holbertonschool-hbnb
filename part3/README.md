@@ -328,4 +328,3 @@ In the last column you can see the actual result we have for the test of this ro
 
 - [@niimatik](https://github.com/niimatik)
 - [@GuillaumeLerayGirardeau](https://github.com/GuillaumeLerayGirardeau)
-- [@Sam224-Amtro](https://github.com/Sam224-Amtro)
