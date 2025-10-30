@@ -2,9 +2,11 @@ from flask import Flask
 from flask_restx import Api
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy
 
 bcrypt = Bcrypt()
 jwt = JWTManager()
+db = SQLAlchemy()
 
 
 def create_app(config_class="config.DevelopmentConfig"):
@@ -23,6 +25,7 @@ def create_app(config_class="config.DevelopmentConfig"):
               doc='/api/v1/')
     bcrypt.init_app(app)
     jwt.init_app(app)
+    db.init_app(app)
 
     # Register the users namespace
     api.add_namespace(users_ns, path='/api/v1/users')

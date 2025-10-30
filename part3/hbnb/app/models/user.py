@@ -1,10 +1,21 @@
 #!/usr/bin/python3
-from app import bcrypt
+from app import db, bcrypt
 from app.models.base_class import basemodel
 from email_validator import validate_email, EmailNotValidError
 
 
 class User(basemodel):
+
+    __tablename__ = 'users'
+
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    place_owned = db.relationship('Place', backref='owner', lazy=True)
+    reviews = db.relationship('Review', backref='user', lazy=True)
+
     def __init__(self, first_name, last_name, email, password):
         super().__init__()
         if not first_name or not last_name or not email or not password:
