@@ -93,7 +93,7 @@ class ReviewResource(Resource):
             "id": review_obj.id,
             "text": review_obj.text,
             "rating": review_obj.rating,
-            "user_id": review_obj.id,
+            "user_id": review_obj.user_id,
             "place_id": review_obj.place_id
         }, 200
 

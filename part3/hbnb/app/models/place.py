@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from app.models.base_class import basemodel
 from app import db
+from app.models.association_tables import place_amenity
 
 
 class Place(basemodel):
@@ -11,6 +12,11 @@ class Place(basemodel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, default=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_data = db.relationship('User', backref='place', lazy=True)
+    reviews = db.relationship('Review', backref='place', lazy=True)
+    amenities = db.relationship('Amenity', secondary=place_amenity,
+                                lazy='subquery', backref=db.backref('place', lazy=True))
 
     def __init__(self, title, description, price,
                  latitude, longitude, owner_id):
