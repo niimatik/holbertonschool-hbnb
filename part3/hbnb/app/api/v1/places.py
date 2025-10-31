@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from app.services import facade
 
 api = Namespace('places', description='Place operations')
@@ -162,5 +162,59 @@ class PlaceResource(Resource):
                     place.add_amenity(i.id)
                     return {"message": "Amenity added successfully"}, 200
             return {"error": "Amenity not found"}, 404
+        except Exception:
+            return {"error": "Invalid input data"}, 400
+
+
+@api.route('/<place_id>/admin')
+class AdminPlaceModify(Resource):
+    @api.expect(place_model)
+    @api.response(200, 'Place updated successfully')
+    @api.response(404, 'Place not found')
+    @api.response(400, 'Invalid input data')
+    @jwt_required()
+    def put(self, place_id):
+        """Update a place's information"""
+        # Placeholder for the logic to update a place by ID
+        try:
+            admin = get_jwt()
+            place_data = api.payload
+            if not admin["is_admin"]:
+                return {'error': 'Admin privileges required'}, 403
+            if "title" in place_data:
+                if not place_data["title"]:
+                    return {"error": "Your place must have a title"}, 400
+            if "description" in place_data:
+                if not place_data["description"]:
+                    return {"error": "Your place must have a description"}, 400
+            if "price" in place_data:
+                if place_data['price'] < 0:
+                    return {"error": "Your place must cost at least 0€"}, 400
+            place = facade.get_place(place_id)
+            if not place:
+                return {"error": "Place not found"}, 404
+            facade.update_place(place_id, place_data)
+            return {"message": "Place updated successfully"}, 200
+        except Exception:
+            return {"error": "Invalid input data"}, 400
+
+
+    @api.expect(place_model)
+    @api.response(200, 'Place updated successfully')
+    @api.response(404, 'Place not found')
+    @api.response(400, 'Invalid input data')
+    @jwt_required()
+    def delete(self, place_id):
+        """delete a place's information"""
+        # Placeholder for the logic to delete a place by ID
+        try:
+            admin = get_jwt()
+            if not admin["is_admin"]:
+                return {'error': 'Admin privileges required'}, 403
+            place = facade.get_place(place_id)
+            if not place:
+                return {"error": "Place not found"}, 404
+            facade.delete_place(place_id)
+            return {"message": "Place deleted successfully"}, 200
         except Exception:
             return {"error": "Invalid input data"}, 400
