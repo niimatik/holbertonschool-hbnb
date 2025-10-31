@@ -14,7 +14,7 @@ This directory contains all the tasks of the HBnB project part 3. You will find 
     - [Place](#place)
     - [Review](#review)
 - [Unittest Documentation](#unittest-documentation)
-- [Entity Realtionship Diagram](#entity-realtionship-diagram)
+- [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Authors](#authors)
 
 ## Overall project description
@@ -325,7 +325,7 @@ In the last column you can see the actual result we have for the test of this ro
 | test_get_reviews_by_place         | Get reviews by valid place ID                          | place.id                                                                                       | 200 OK                            | 200 OK             |
 | test_get_reviews_by_place_invalid_id | Get reviews by invalid place ID                     | place_id: "azerty12346"                                                                        | 404 Not Found                     | 404 Not Found      |
 
-## Entity Realtionship Diagram
+## Entity Relationship Diagram
 
 <img width="624" height="1305" alt="Heir diagram" src="https://github.com/user-attachments/assets/93bb34d0-b308-47cf-83ef-de9508e629dc" />
 
