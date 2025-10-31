@@ -45,14 +45,14 @@ class ReviewList(Resource):
             if current_place.owner_id == current_user:
                 return {
                     'error': 'You cannot review your own place.'
-                    }, 403
+                }, 403
             print("by place")
             all_reviews = facade.get_reviews_by_place(current_place.id)
             for review in all_reviews:
                 if review.user_id == current_user:
                     return {
                         'error': 'You have already reviewed this place.'
-                        }, 403
+                    }, 403
             print("All ok")
             review = facade.create_review(data)
             return {
@@ -182,7 +182,6 @@ class AdminReviewModify(Resource):
         except Exception:
             return {"error": "Invalid input data"}, 400
 
-
     @api.expect(review_model)
     @api.response(200, 'Review deleted successfully')
     @api.response(404, 'Review not found')
@@ -192,7 +191,7 @@ class AdminReviewModify(Resource):
         """Delete a review"""
         admin = get_jwt()
         if not admin["is_admin"]:
-                return {'error': 'Admin privileges required'}, 403
+            return {'error': 'Admin privileges required'}, 403
         review_obj = facade.get_review(review_id)
         if not review_obj:
             return {"error": "Review not found"}, 404

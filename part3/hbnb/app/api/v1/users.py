@@ -27,7 +27,7 @@ admin_model = api.model('User', {
     'password': fields.String(required=True,
                               description='password of the user'),
     'is_admin': fields.Boolean(required=True,
-                              description='is the user an admin')
+                               description='is the user an admin')
 })
 
 
@@ -150,8 +150,6 @@ class AdminUserResource(Resource):
                     'last_name': user.last_name, 'email': user.email}, 200
         except Exception:
             return {"error": "Invalid input data"}, 400
-
-
 
     @api.response(400, 'Invalid input data')
     @api.response(201, 'User successfully deleted')

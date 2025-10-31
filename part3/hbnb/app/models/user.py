@@ -13,11 +13,13 @@ class User(basemodel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    place_owned = db.relationship('Place', backref='owner', lazy=True, cascade='all, delete')
-    reviews = db.relationship('Review', backref='user', lazy=True, cascade='all, delete')
+    place_owned = db.relationship(
+        'Place', backref='owner', lazy=True, cascade='all, delete')
+    reviews = db.relationship(
+        'Review', backref='user', lazy=True, cascade='all, delete')
 
     def __init__(self, first_name, last_name, email, password,
-                 is_admin = False):
+                 is_admin=False):
         super().__init__()
         if not first_name or not last_name or not email or not password:
             raise ValueError("Empty value !")
