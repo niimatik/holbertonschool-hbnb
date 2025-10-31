@@ -327,7 +327,7 @@ In the last column you can see the actual result we have for the test of this ro
 
 ## Entity Realtionship Diagram
 
-<img width="1124" height="1805" alt="Heir diagram" src="https://github.com/user-attachments/assets/93bb34d0-b308-47cf-83ef-de9508e629dc" />
+<img width="624" height="1305" alt="Heir diagram" src="https://github.com/user-attachments/assets/93bb34d0-b308-47cf-83ef-de9508e629dc" />
 
 ## Authors
 
