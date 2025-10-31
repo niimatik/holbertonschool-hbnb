@@ -1,6 +1,6 @@
-# HBnB Part 2
+# HBnB Part 3
 
-This directory contains all the task 2 of the HBnB project. You will find down below eplanations about the purpose of all directories and files, a complete description of the core business logic classes, as well as example of uses and instructions to run the application correctly.
+This directory contains all the tasks of the HBnB project part 3. You will find down below eplanations about the purpose of all directories and files, a complete description of the core business logic classes, as well as example of uses and instructions to run the application correctly.
 
 ## Table of Contents
 
@@ -14,6 +14,7 @@ This directory contains all the task 2 of the HBnB project. You will find down b
     - [Place](#place)
     - [Review](#review)
 - [Unittest Documentation](#unittest-documentation)
+- [Entity Realtionship Diagram](#entity-realtionship-diagram)
 - [Authors](#authors)
 
 ## Overall project description
@@ -323,6 +324,8 @@ In the last column you can see the actual result we have for the test of this ro
 | test_delete_review_invalid_id     | Delete a review with invalid ID                        | review_id: "azerty123456"                                                                      | 404 Not Found                     | 404 Not Found      |
 | test_get_reviews_by_place         | Get reviews by valid place ID                          | place.id                                                                                       | 200 OK                            | 200 OK             |
 | test_get_reviews_by_place_invalid_id | Get reviews by invalid place ID                     | place_id: "azerty12346"                                                                        | 404 Not Found                     | 404 Not Found      |
+
+## Entity Realtionship Diagram
 
 <img width="1424" height="2105" alt="Heir diagram" src="https://github.com/user-attachments/assets/93bb34d0-b308-47cf-83ef-de9508e629dc" />
 
