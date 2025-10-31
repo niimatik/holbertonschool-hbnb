@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from app.services import facade
 
 api = Namespace('reviews', description='Review operations')
@@ -154,3 +154,47 @@ class PlaceReviewList(Resource):
             }
             for r in reviews
         ], 200
+
+
+@api.route('/<review_id>/admin')
+class AdminReviewModify(Resource):
+    @api.expect(review_model)
+    @api.response(200, 'Review updated successfully')
+    @api.response(404, 'Review not found')
+    @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
+    @jwt_required()
+    def put(self, review_id):
+        """Update a review's information"""
+        try:
+            admin = get_jwt()
+            data = api.payload
+            if not admin["is_admin"]:
+                return {'error': 'Admin privileges required'}, 403
+            if "rating" in data:
+                if data["rating"] < 1 or data["rating"] > 5:
+                    return {"error": "Rating must be between 1 and 5 !"}, 400
+            review_obj = facade.get_review(review_id)
+            if not review_obj:
+                return {"error": "Review not found"}, 404
+            facade.update_review(review_id, data)
+            return {"message": "Review updated successfully"}, 200
+        except Exception:
+            return {"error": "Invalid input data"}, 400
+
+
+    @api.expect(review_model)
+    @api.response(200, 'Review deleted successfully')
+    @api.response(404, 'Review not found')
+    @api.response(403, 'Admin privileges required')
+    @jwt_required()
+    def delete(self, review_id):
+        """Delete a review"""
+        admin = get_jwt()
+        if not admin["is_admin"]:
+                return {'error': 'Admin privileges required'}, 403
+        review_obj = facade.get_review(review_id)
+        if not review_obj:
+            return {"error": "Review not found"}, 404
+        facade.delete_review(review_id)
+        return {'message': 'Review deleted successfully'}, 200

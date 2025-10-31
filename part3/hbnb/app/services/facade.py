@@ -1,3 +1,4 @@
+from app import bcrypt
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
@@ -38,7 +39,14 @@ class HBnBFacade:
 
     def update_user(self, user_id, user_data):
         # Placeholder for logic to update an user
+        if user_data["password"]:
+            user_data["password"] = bcrypt.generate_password_hash(
+                                    user_data["password"]).decode('utf-8')
         return self.user_repo.update(user_id, user_data)
+
+    def delete_user(self, user_id):
+        # Placeholder for logic to delete a user
+        self.user_repo.delete(user_id)
 
     """
     Amenity Methods
@@ -61,6 +69,10 @@ class HBnBFacade:
     def update_amenity(self, amenity_id, amenity_data):
         # Placeholder for logic to update an amenity
         return self.amenity_repo.update(amenity_id, amenity_data)
+
+    def delete_amenity(self, amenity_id):
+        # Placeholder for logic to delete an amenity
+        self.amenity_repo.delete(amenity_id)
 
     """
     Place Methods
@@ -85,6 +97,10 @@ class HBnBFacade:
     def update_place(self, place_id, place_data):
         # Placeholder for logic to update a place
         return self.place_repo.update(place_id, place_data)
+
+    def delete_place(self, place_id):
+        # Placeholder for logic to delete a place
+        self.place_repo.delete(place_id)
 
     """
     Review Methods
