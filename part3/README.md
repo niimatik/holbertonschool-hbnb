@@ -324,6 +324,8 @@ In the last column you can see the actual result we have for the test of this ro
 | test_get_reviews_by_place         | Get reviews by valid place ID                          | place.id                                                                                       | 200 OK                            | 200 OK             |
 | test_get_reviews_by_place_invalid_id | Get reviews by invalid place ID                     | place_id: "azerty12346"                                                                        | 404 Not Found                     | 404 Not Found      |
 
+<img width="1424" height="2105" alt="Heir diagram" src="https://github.com/user-attachments/assets/93bb34d0-b308-47cf-83ef-de9508e629dc" />
+
 ## Authors
 
 - [@niimatik](https://github.com/niimatik)
