@@ -6,9 +6,12 @@ from app import db
 class Review(basemodel):
     __tablename__ = 'reviews'
 
-    text = db.Column(db.String(200), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
-    place_id = db.Column(db.Integer, db.ForeignKey('places.id'), nullable=False)
+    text = db.Column(
+        db.String(200), nullable=False)
+    rating = db.Column(
+        db.Integer, nullable=False)
+    place_id = db.Column(
+        db.Integer, db.ForeignKey('places.id'), nullable=False)
     place_data = db.relationship('Place', backref='review', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user_data = db.relationship('User', backref='review', lazy=True)

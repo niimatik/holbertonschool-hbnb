@@ -41,7 +41,7 @@ class HBnBFacade:
         # Placeholder for logic to update an user
         if user_data["password"]:
             user_data["password"] = bcrypt.generate_password_hash(
-                                    user_data["password"]).decode('utf-8')
+                user_data["password"]).decode('utf-8')
         return self.user_repo.update(user_id, user_data)
 
     def delete_user(self, user_id):
