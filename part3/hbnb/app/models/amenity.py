@@ -8,9 +8,9 @@ class Amenity(basemodel):
     __tablename__ = 'amenities'
 
     name = db.Column(db.String(50), nullable=False)
-    place_id = db.Column(db.String(300))
-    places = db.relationship('Place', secondary=place_amenity, lazy='subquery',
-                             backref=db.backref('amenity', lazy=True))
+    place_data = db.relationship(
+        'Place', secondary=place_amenity,
+        lazy='subquery', backref=db.backref('amenity', lazy=True))
 
     def __init__(self, name):
         super().__init__()

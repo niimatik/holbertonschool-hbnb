@@ -13,15 +13,16 @@ class Place(basemodel):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, default=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    owner_data = db.relationship('User', backref='place', lazy=True)
+    owner_data = db.relationship('User', backref='places', lazy=True)
     reviews = db.relationship(
         'Review', backref='place', lazy=True, cascade='all, delete')
     amenities = db.relationship(
         'Amenity', secondary=place_amenity,
         lazy='subquery', backref=db.backref('place', lazy=True))
 
+
     def __init__(self, title, description, price,
-                 latitude, longitude, owner_id):
+                 latitude, longitude, owner_id, amenities):
         super().__init__()
         if not title or not description or not owner_id:
             raise ValueError("Some fields are empty !")
@@ -41,7 +42,7 @@ class Place(basemodel):
             )
         self.longitude = longitude
         self.owner_id = owner_id
-        self.amenities = []  # List to store related amenities
+        self.amenities = amenities
         self.reviews = []  # List to store related reviews
 
     def add_review(self, review):
