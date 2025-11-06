@@ -27,7 +27,7 @@ place_model = api.model('Place', {
     'longitude': fields.Float(required=True,
                               description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    'amenities': fields.List(fields.String, required=True,
+    'amenities': fields.List(fields.String, required=False,
                              description="List of amenities ID's")
 })
 
@@ -37,6 +37,8 @@ class PlaceList(Resource):
     @api.expect(place_model)
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Unauthorized action')
+    @api.response(404, 'Amenity not found')
     @jwt_required()
     def post(self):
         """Register a new place"""
@@ -48,7 +50,22 @@ class PlaceList(Resource):
                 raise ValueError("User does not exist")
             if place_data["owner_id"] != current_user:
                 return {'error': 'Unauthorized action'}, 403
+            amenity_list = []
+            if place_data["amenities"]:
+                for name in place_data["amenities"]:
+                    new_a = facade.get_amenity_by_name(name)
+                    if not new_a:
+                        return {'error': 'Amenity not found'}, 404
+                    else:
+                        amenity_list.append(new_a)
+            place_data["amenities"] = amenity_list
             new_place = facade.create_place(place_data)
+            new_place_amenities = []
+            for i in new_place.amenities:
+                new_place_amenities.append({
+                    "id": i.id,
+                    "name": i.name
+                })
             return {
                 'id': new_place.id,
                 'title': new_place.title,
@@ -57,9 +74,10 @@ class PlaceList(Resource):
                 'latitude': new_place.latitude,
                 'longitude': new_place.longitude,
                 'owner_id': new_place.owner_id,
+                'amenities': new_place_amenities
             }, 201
         except Exception:
-            return {"error": "Invalid input data"}, 400
+            return {"error": 'Invalid input data'}, 400
 
     @api.response(200, 'List of places retrieved successfully')
     def get(self):
@@ -90,10 +108,9 @@ class PlaceResource(Resource):
         owner_data = facade.get_user(place.owner_id)
         amenities_list = []
         for i in place.amenities:
-            name_amenity = facade.get_amenity(i)
             amenities_list.append({
-                "id": i,
-                "name": name_amenity.name
+                "id": i.id,
+                "name": i.name
             })
         return {
             "id": place.id,
@@ -130,6 +147,15 @@ class PlaceResource(Resource):
             if "price" in place_data:
                 if place_data['price'] < 0:
                     return {"error": "Your place must cost at least 0€"}, 400
+            if place_data["amenities"]:
+                amenity_list = []
+                for name in place_data["amenities"]:
+                    new_a = facade.get_amenity_by_name(name)
+                    if not new_a:
+                        return {'error': 'Amenity not found'}, 404
+                    else:
+                        amenity_list.append(new_a)
+                place_data["amenities"] = amenity_list
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404
@@ -140,31 +166,6 @@ class PlaceResource(Resource):
         except Exception:
             return {"error": "Invalid input data"}, 400
 
-    @api.expect(amenity_model)
-    @api.response(404, 'Place not found')
-    @api.response(404, 'Amenity not found')
-    @api.response(400, 'Invalid input data')
-    @api.response(200, 'Amenity added successfully')
-    @jwt_required()
-    def post(self, place_id):
-        """Add a new amenity"""
-        try:
-            current_user = get_jwt_identity()
-            place = facade.get_place(place_id)
-            if not place:
-                return {"error": "Place not found"}, 404
-            if place.owner_id != current_user:
-                return {"error": "Unauthorized action"}, 403
-            amenity = api.payload
-            all_amenities = facade.get_all_amenities()
-            for i in all_amenities:
-                if i.name == amenity["name"]:
-                    place.add_amenity(i.id)
-                    return {"message": "Amenity added successfully"}, 200
-            return {"error": "Amenity not found"}, 404
-        except Exception:
-            return {"error": "Invalid input data"}, 400
-
 
 @api.route('/<place_id>/admin')
 class AdminPlaceModify(Resource):
@@ -172,6 +173,7 @@ class AdminPlaceModify(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def put(self, place_id):
         """Update a place's information"""
@@ -190,6 +192,15 @@ class AdminPlaceModify(Resource):
             if "price" in place_data:
                 if place_data['price'] < 0:
                     return {"error": "Your place must cost at least 0€"}, 400
+            if place_data["amenities"]:
+                amenity_list = []
+                for name in place_data["amenities"]:
+                    new_a = facade.get_amenity_by_name(name)
+                    if not new_a:
+                        return {'error': 'Amenity not found'}, 404
+                    else:
+                        amenity_list.append(new_a)
+                place_data["amenities"] = amenity_list
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404
@@ -202,6 +213,7 @@ class AdminPlaceModify(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def delete(self, place_id):
         """delete a place's information"""

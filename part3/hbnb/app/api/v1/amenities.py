@@ -80,6 +80,7 @@ class AdminUserResource(Resource):
     @api.expect(amenity_model)
     @api.response(201, 'Amenity successfully created')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def post(self):
         """Register a new amenity"""
@@ -105,6 +106,7 @@ class AdminAmenityModify(Resource):
     @api.response(200, 'Amenity updated successfully')
     @api.response(404, 'Amenity not found')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def put(self, amenity_id):
         """Update an amenity's information"""
@@ -124,10 +126,11 @@ class AdminAmenityModify(Resource):
         except Exception:
             return {"error": "Invalid input data"}, 400
 
-    @api.expect(amenity_model)
+
     @api.response(200, 'Amenity updated successfully')
     @api.response(404, 'Amenity not found')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def delete(self, amenity_id):
         """delete an amenity's information"""
