@@ -1,3 +1,4 @@
+#!usr/bin/node
+
 document.addEventListener('DOMContentLoaded', () => {
-    /* DO SOMETHING */
-  });
+});
