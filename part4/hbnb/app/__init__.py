@@ -1,3 +1,5 @@
+#!usr/bin/python3
+
 from flask import Flask, render_template
 from flask_restx import Api
 from flask_bcrypt import Bcrypt
@@ -45,7 +47,7 @@ def create_app(config_class="config.DevelopmentConfig"):
     # Register the protected namespace
     api.add_namespace(protected_ns, path='/api/v1/protected')
 
-    @app.route('/')
+    @app.route('/index')
     def home():
         return render_template('index.html')
 

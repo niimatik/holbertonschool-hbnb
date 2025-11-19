@@ -20,6 +20,16 @@
     <div class="place-card">
       <section id="places-list">
         <!-- List of places will be populated dynamically -->
+        {% for place in places %}
+        <div class="place-card">
+          <img src="{{ place.image }}" alt="{{ place.name }}" class="place-image">
+          <div class="place-content">
+            <h3 class="place-title">{{ place.name }}</h3>
+            <p class="place-description">{{ place.description }}</p>
+            <p class="place-price">${{ place.price }} / night</p>
+          </div>
+        </div>
+        {% endfor %}
       </section>
     </div>
   </main>
