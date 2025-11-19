@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   async function getPlaces() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/v1/places');
+      const response = await fetch('/api/v1/places');
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       const places = await response.json();
@@ -21,23 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'place-card';
 
-      const content = document.createElement('div');
-      content.className = 'place-content';
-
       const title = document.createElement('h3');
       title.className = 'place-title';
       title.textContent = place.title;
-      content.appendChild(title);
-
-      const desc = document.createElement('p');
-      desc.className = 'place-description';
-      desc.textContent = place.description;
-      content.appendChild(desc);
+      card.appendChild(title);
 
       const price = document.createElement('p');
       price.className = 'place-price';
       price.textContent = place.price;
-      content.appendChild(price);
+      card.appendChild(price);
+
+      const button = document.createElement('button');
+      button.className = 'details-button';
+      button.textContent = 'View Details';
+      card.appendChild(button);
       container.appendChild(card);
     });
   }
