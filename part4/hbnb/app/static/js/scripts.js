@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const button = document.createElement('button');
       button.className = 'details-button';
       button.textContent = 'View Details';
+      button.addEventListener('click', () => {
+        window.location.href = `/place?id=${place.id}`;
+      });
       card.appendChild(button);
       container.appendChild(card);
     });
