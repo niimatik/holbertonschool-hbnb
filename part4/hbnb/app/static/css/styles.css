@@ -19,12 +19,15 @@ header {
 	color: #ff5a5f;
 }
 
+nav {
+	text-align: center;
+}
+
 .header-link {
 	color: #ff5a5f;
 	font-weight: 700;
 	text-decoration: none;
 	margin-left: 2rem;
-	text-align: center;
 }
 
 main {
@@ -68,6 +71,8 @@ h6 {
 }
 
 .details-button {
+	text-decoration: none;
+	text-align: center;
 	background-color: #fff;
 	color: #333;
 	border: 1px solid #eaeaea;
