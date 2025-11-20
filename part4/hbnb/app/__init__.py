@@ -55,4 +55,8 @@ def create_app(config_class="config.DevelopmentConfig"):
     def login():
         return render_template('login.html')
 
+    @app.route('/place')
+    def place():
+        return render_template('place.html')
+
     return app
