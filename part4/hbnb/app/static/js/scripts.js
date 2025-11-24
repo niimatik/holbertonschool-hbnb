@@ -214,4 +214,46 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  const add_review = document.getElementById('summit_button')
+  add_review.addEventListener('click', (event) => {
+    review_submit(event);
+  })
+  async function review_submit(event) {
+    event.preventDefault();
+    const review = document.getElementById('review').value;
+    const rating = Number(document.getElementById('rating').value);
+    const id_data = new URLSearchParams(window.location.search);
+    const place_id = id_data.get('id');
+    console.log("review:", review);
+    console.log("rating:", rating);
+    console.log("user_id:", getCookie('user_id'));
+    console.log("place_id:", place_id);
+    console.log("Authorization:", "Bearer " + getCookie('token'));
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/v1/reviews', {
+        method: "POST",
+        body: JSON.stringify({
+          "text": review,
+          "rating": rating,
+          "user_id": getCookie('user_id'),
+          "place_id": place_id
+        }),
+        headers: {
+          "Authorization": "Bearer " + getCookie('token'),
+          "Content-Type": "application/json"
+        }
+      })
+      if (response.ok) {
+        alert('Review submitted successfully !');
+        document.getElementById('review').value = "";
+        document.getElementById('rating').value = 1;
+      } else {
+        alert('Failed to submit review');
+      }
+    } catch (error) {
+      console.error("Erreur fetch:", error);
+    }
+  }
 });
