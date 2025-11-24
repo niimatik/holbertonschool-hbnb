@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const place_detail = await response.json();
       renderPlaceDetail(place_detail);
+      getReviews(placeid);
 
     } catch (error) {
       console.error('Erreur lors de la récupération du place:', error);
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderPlaceDetail(place) {
-    const container = document.getElementById('places-list');
+    const container = document.getElementById('place-details');
     container.innerHTML = '';
 
     const detail = document.createElement('div');
@@ -96,7 +97,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     container.appendChild(detail);
+
   }
+
+  async function getReviews(placeid) {
+    try {
+      const response = await fetch(`/api/v1/reviews/places/${placeid}/reviews`);
+      const review_detail = await response.json();
+      renderReviews(review_detail);
+    } catch (e) {
+      console.error("Erreur reviews:", e);
+    }
+  }
+
+  function renderReviews(reviews) {
+    const container = document.getElementById("reviews");
+    container.innerHTML = "<h3>Reviews :</h3>";
+
+    if (!reviews.length) {
+      container.innerHTML += `<p>No reviews for this place</p>`;
+      return;
+    }
+
+    reviews.forEach(r => {
+      const card = document.createElement("div");
+      card.className = "reviews";
+      card.innerHTML = `
+        <p>${r.user.first_name} ${r.user.last_name}</p>
+        <p>${r.text}</p>
+        <p>${r.rating} ★</p>
+      `;
+      container.appendChild(card);
+    });
+  }
+
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -149,6 +183,35 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         alert("Erreur serveur : " + error.message);
       }
+    });
+  }
+
+  const priceFilterElement = document.getElementById('price-filter');
+
+  if (priceFilterElement) {
+    const options = ['All', 10, 50, 100, 150];
+    options.forEach(value => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = value;
+      priceFilterElement.appendChild(option);
+    });
+    priceFilterElement.addEventListener('change', (event) => {
+      const selectPrice = event.target.value;
+
+      const places = document.querySelectorAll('.place-card');
+
+      places.forEach(place => {
+        const priceText = place.querySelector('.place-price').textContent;
+
+        const price = parseInt(priceText.replace(/\D/g, ''), 10);
+
+        if (selectPrice === 'All' || price <= parseInt(selectPrice)) {
+          place.style.display = 'block';
+        } else {
+          place.style.display = 'none';
+        }
+      });
     });
   }
 });

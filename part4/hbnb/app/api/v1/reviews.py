@@ -143,17 +143,23 @@ class PlaceReviewList(Resource):
         """Get all reviews for a specific place"""
         try:
             reviews = facade.get_reviews_by_place(place_id)
+            if not reviews:
+                return [], 200  # Pas d'erreurs si aucun review
+            result = []
+            for r in reviews:
+                user = facade.get_user(r.user_id)
+                result.append({
+                    "id": r.id,
+                    "text": r.text,
+                    "rating": r.rating,
+                    "user": {
+                        "first_name": user.first_name,
+                        "last_name": user.last_name
+                    }
+                })
+            return result, 200
         except Exception:
             return {"error": "Place not found"}, 404
-
-        return [
-            {
-                "id": r.id,
-                "text": r.text,
-                "rating": r.rating
-            }
-            for r in reviews
-        ], 200
 
 
 @api.route('/<review_id>/admin')

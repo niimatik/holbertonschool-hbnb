@@ -53,6 +53,30 @@ main {
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.place-details{
+	background-color: #fff;
+	border: 1px solid #eaeaea;
+	border-radius: 12px;
+	padding: 16px;
+	overflow: hidden;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reviews{
+	background-color: #fff;
+	border: 1px solid #eaeaea;
+	border-radius: 12px;
+	padding: 16px;
+	overflow: hidden;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 footer {
 	color: #333;
 	text-decoration: none;
@@ -85,5 +109,22 @@ h6 {
 }
 
 .details-button:hover {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+button{
+	text-decoration: none;
+	text-align: center;
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #eaeaea;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	flex-direction: column;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover{
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
